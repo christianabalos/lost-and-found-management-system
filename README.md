@@ -10,9 +10,10 @@
 # Lost and Found Management System
 
 ## Developers
-
-* Christian Abalos
-* (Add Group Member Names Here)
+* Christian James S. Abalos
+* James Patrick C. Cabaluna 
+* Bhing Marie Claire S. Untal
+  
 
 ## Project Description
 

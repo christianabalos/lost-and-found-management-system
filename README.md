@@ -7,52 +7,110 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# Lost and Found Management System
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Developers
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* Christian Abalos
+* (Add Group Member Names Here)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Project Description
 
-## Learning Laravel
+The Lost and Found Management System is a web-based application developed using Laravel and MySQL. The system allows users to report lost items, report found items, manage claims, and generate downloadable reports.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Features
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Authentication
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+* Login
+* Logout
+* Session Handling
+* Password Hashing
 
-## Agentic Development
+### CRUD Operations
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+* Items Management
+* Lost Reports Management
+* Found Reports Management
+* Claims Management
+
+### REST API
+
+* GET
+* POST
+* PUT/PATCH
+* DELETE
+
+### Reports
+
+* CSV Export
+* XLSX Export
+* PDF Export
+* JSON Export
+
+### Security
+
+* Authentication Middleware
+* Role-Based Access (Admin/User)
+
+## Technologies Used
+
+* Laravel 12
+* PHP
+* MySQL
+* Laravel Breeze
+* Laravel Excel
+* DomPDF
+* Blade Templates
+
+## Database Tables
+
+* Users
+* Items
+* Lost Reports
+* Found Reports
+* Claims
+
+## How the System Works
+
+1. Users register and log in.
+2. Users can create lost reports and found reports.
+3. Users can manage item information through CRUD operations.
+4. Claims can be submitted for recovered items.
+5. Administrators can monitor records through the dashboard.
+6. Reports can be exported as CSV, XLSX, PDF, and JSON.
+
+## Installation
 
 ```bash
-composer require laravel/boost --dev
+git clone https://github.com/christianabalos/lost-and-found-management-system.git
 
-php artisan boost:install
+cd lost-and-found-management-system
+
+composer install
+
+cp .env.example .env
+
+php artisan key:generate
+
+php artisan migrate
+
+php artisan serve
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## API Endpoints
 
-## Contributing
+* GET /api/items
+* POST /api/items
+* PUT /api/items/{id}
+* PATCH /api/items/{id}
+* DELETE /api/items/{id}
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## GitHub Repository
 
-## Code of Conduct
+https://github.com/christianabalos/lost-and-found-management-system
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Hosting Link
 
-## Security Vulnerabilities
+To be added after deployment.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

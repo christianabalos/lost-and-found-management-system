@@ -21,8 +21,8 @@
 
             <br><br>
 
-            <button type="submit">
-                Update Claim
+            <button type="submit" style="background:blue;color:white;padding:10px 20px;">
+                Update Claims
             </button>
 
         </form>

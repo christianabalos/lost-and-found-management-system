@@ -25,12 +25,44 @@ class LostReportController extends Controller
 
     public function store(Request $request)
     {
-        LostReport::create([
-            'user_id' => Auth::id(),
-            'item_id' => $request->item_id,
-            'date_lost' => $request->date_lost,
-            'location_lost' => $request->location_lost,
-        ]);
+        $report = new LostReport();
+
+        $report->user_id = Auth::id();
+        $report->item_id = $request->item_id;
+        $report->date_lost = $request->date_lost;
+        $report->location_lost = $request->location_lost;
+
+        $report->save();
+
+        return redirect()->route('lost-reports.index');
+    }
+
+    public function show(LostReport $lost_report)
+    {
+        //
+    }
+
+    public function edit(LostReport $lost_report)
+    {
+        $items = Item::all();
+
+        return view('lost_reports.edit', compact('lost_report', 'items'));
+    }
+
+    public function update(Request $request, LostReport $lost_report)
+    {
+        $lost_report->item_id = $request->item_id;
+        $lost_report->date_lost = $request->date_lost;
+        $lost_report->location_lost = $request->location_lost;
+
+        $lost_report->save();
+
+        return redirect()->route('lost-reports.index');
+    }
+
+    public function destroy(LostReport $lost_report)
+    {
+        $lost_report->delete();
 
         return redirect()->route('lost-reports.index');
     }

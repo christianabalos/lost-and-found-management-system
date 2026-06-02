@@ -15,9 +15,11 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    @if(Auth::user()->role == 'admin')
                     <x-nav-link :href="route('items.index')" :active="request()->routeIs('items.*')">
                         {{ __('Items') }}
                     </x-nav-link>
+                    @endif
 
                     <x-nav-link :href="route('lost-reports.index')" :active="request()->routeIs('lost-reports.*')">
                         {{ __('Lost Reports') }}
@@ -38,7 +40,9 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>
+                                {{ Auth::user()->name }} ({{ ucfirst(Auth::user()->role) }})
+                            </div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -99,9 +103,11 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
+            @if(Auth::user()->role == 'admin')
             <x-responsive-nav-link :href="route('items.index')" :active="request()->routeIs('items.*')">
                 {{ __('Items') }}
             </x-responsive-nav-link>
+            @endif
 
             <x-responsive-nav-link :href="route('lost-reports.index')" :active="request()->routeIs('lost-reports.*')">
                 {{ __('Lost Reports') }}
@@ -109,6 +115,10 @@
 
             <x-responsive-nav-link :href="route('found-reports.index')" :active="request()->routeIs('found-reports.*')">
                 {{ __('Found Reports') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('claims.index')" :active="request()->routeIs('claims.*')">
+                {{ __('Claims') }}
             </x-responsive-nav-link>
 
         </div>

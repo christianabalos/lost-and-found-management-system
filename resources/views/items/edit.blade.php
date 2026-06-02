@@ -35,7 +35,7 @@
 
             <br><br>
 
-            <button type="submit">
+            <button type="submit" style="background:blue;color:white;padding:10px 20px;">
                 Update Item
             </button>
         </form>

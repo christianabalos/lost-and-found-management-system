@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
+    private function checkAdmin()
+    {
+        if (Auth::user()->role != 'admin')
+        {
+            abort(403, 'Admins only.');
+        }
+    }
+
     public function index()
     {
         $items = Item::latest()->get();
@@ -16,11 +25,15 @@ class ItemController extends Controller
 
     public function create()
     {
+        $this->checkAdmin();
+
         return view('items.create');
     }
 
     public function store(Request $request)
     {
+        $this->checkAdmin();
+
         $request->validate([
             'item_name' => 'required',
             'description' => 'required',
@@ -44,11 +57,15 @@ class ItemController extends Controller
 
     public function edit(Item $item)
     {
+        $this->checkAdmin();
+
         return view('items.edit', compact('item'));
     }
 
     public function update(Request $request, Item $item)
     {
+        $this->checkAdmin();
+
         $request->validate([
             'item_name' => 'required',
             'description' => 'required',
@@ -67,6 +84,8 @@ class ItemController extends Controller
 
     public function destroy(Item $item)
     {
+        $this->checkAdmin();
+
         $item->delete();
 
         return redirect()->route('items.index')

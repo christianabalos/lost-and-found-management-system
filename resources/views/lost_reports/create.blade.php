@@ -32,7 +32,8 @@
 
             <br><br>
 
-            <button type="submit">
+            <button type="submit"
+                    style="background:blue;color:white;padding:10px 20px;">
                 Save Lost Report
             </button>
         </form>

@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2>Edit Found Report</h2>
+        <h2>Edit Lost Report</h2>
     </x-slot>
 
     <div style="padding:20px;">
 
-        <form action="{{ route('found-reports.update', $found_report->id) }}" method="POST">
+        <form action="{{ route('lost-reports.update', $lost_report->id) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -14,7 +14,7 @@
             <select name="item_id">
                 @foreach($items as $item)
                     <option value="{{ $item->id }}"
-                        {{ $found_report->item_id == $item->id ? 'selected' : '' }}>
+                        {{ $lost_report->item_id == $item->id ? 'selected' : '' }}>
                         {{ $item->id }}
                     </option>
                 @endforeach
@@ -22,24 +22,24 @@
 
             <br><br>
 
-            <p>Date Found</p>
+            <p>Date Lost</p>
 
             <input type="date"
-                   name="date_found"
-                   value="{{ $found_report->date_found }}">
+                   name="date_lost"
+                   value="{{ $lost_report->date_lost }}">
 
             <br><br>
 
-            <p>Location Found</p>
+            <p>Location Lost</p>
 
             <input type="text"
-                   name="location_found"
-                   value="{{ $found_report->location_found }}">
+                   name="location_lost"
+                   value="{{ $lost_report->location_lost }}">
 
             <br><br>
 
             <button type="submit" style="background:blue;color:white;padding:10px 20px;">
-                Update Found Report
+                Update lost Report
             </button>
 
         </form>

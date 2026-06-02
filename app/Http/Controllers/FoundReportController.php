@@ -25,12 +25,44 @@ class FoundReportController extends Controller
 
     public function store(Request $request)
     {
-        FoundReport::create([
-            'user_id' => Auth::id(),
-            'item_id' => $request->item_id,
-            'date_found' => $request->date_found,
-            'location_found' => $request->location_found,
-        ]);
+        $report = new FoundReport();
+
+        $report->user_id = Auth::id();
+        $report->item_id = $request->item_id;
+        $report->date_found = $request->date_found;
+        $report->location_found = $request->location_found;
+
+        $report->save();
+
+        return redirect()->route('found-reports.index');
+    }
+
+    public function show(FoundReport $found_report)
+    {
+        //
+    }
+
+    public function edit(FoundReport $found_report)
+    {
+        $items = Item::all();
+
+        return view('found_reports.edit', compact('found_report', 'items'));
+    }
+
+    public function update(Request $request, FoundReport $found_report)
+    {
+        $found_report->item_id = $request->item_id;
+        $found_report->date_found = $request->date_found;
+        $found_report->location_found = $request->location_found;
+
+        $found_report->save();
+
+        return redirect()->route('found-reports.index');
+    }
+
+    public function destroy(FoundReport $found_report)
+    {
+        $found_report->delete();
 
         return redirect()->route('found-reports.index');
     }

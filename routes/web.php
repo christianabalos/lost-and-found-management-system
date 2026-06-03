@@ -5,6 +5,7 @@ use App\Imports\ItemsImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 use App\Models\User;
 use App\Models\Item;
@@ -87,9 +88,30 @@ Route::get('/items/export/pdf', function () {
 // Import CSV/XLSX
 Route::post('/items/import', function (Request $request) {
 
-    Excel::import(new ItemsImport, $request->file('file'));
+    $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load(
+        $request->file('file')->getPathname()
+    );
 
-    return redirect()->back()->with('success', 'Items imported successfully.');
+    $rows = $spreadsheet
+        ->getActiveSheet()
+        ->toArray();
+
+    foreach ($rows as $row) {
+
+        if (empty($row[1])) {
+            continue;
+        }
+
+        Item::create([
+            'item_name'   => $row[1],
+            'description' => $row[2],
+            'status'      => $row[4],
+        ]);
+    }
+
+    return redirect()
+        ->route('items.index')
+        ->with('success', 'Items imported successfully.');
 
 })->name('items.import');
 

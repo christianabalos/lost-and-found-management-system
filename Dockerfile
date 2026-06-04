@@ -1,13 +1,18 @@
 FROM php:8.4-cli
 
 RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libzip-dev \
-    zip \
+    git \
     unzip \
-    git
+    zip \
+    libzip-dev \
+    libpng-dev \
+    libxml2-dev
 
-RUN docker-php-ext-install pdo pdo_mysql mysqli gd
+RUN docker-php-ext-install \
+    pdo \
+    pdo_mysql \
+    zip \
+    gd
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 

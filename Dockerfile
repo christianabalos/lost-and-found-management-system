@@ -1,18 +1,17 @@
 FROM php:8.4-cli
 
 RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libzip-dev \
-    zip \
+    curl \
+    git \
     unzip \
-    git
+    zip \
+    libpng-dev \
+    libzip-dev
 
-RUN docker-php-ext-install \
-    pdo \
-    pdo_mysql \
-    mysqli \
-    gd \
-    zip
+RUN docker-php-ext-install pdo pdo_mysql mysqli gd zip
+
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -22,4 +21,7 @@ COPY . .
 
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-CMD php artisan serve --host=0.0.0.0 --port=$PORT
+RUN npm install
+RUN npm run build
+
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]

@@ -23,7 +23,7 @@ use App\Http\Controllers\LostReportController;
 use App\Http\Controllers\FoundReportController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Route::get('/dashboard', function () {

@@ -9,9 +9,19 @@ class FoundReport extends Model
     protected $fillable = [
         'user_id',
         'item_id',
+        'item_name',
+        'category',
+        'description',
+        'item_image',
         'date_found',
-        'location_found'
+        'location_found',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     public function user()
     {
@@ -21,5 +31,10 @@ class FoundReport extends Model
     public function item()
     {
         return $this->belongsTo(Item::class);
+    }
+
+    public function matches()
+    {
+        return $this->hasMany(ItemMatch::class);
     }
 }

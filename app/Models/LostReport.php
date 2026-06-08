@@ -9,9 +9,19 @@ class LostReport extends Model
     protected $fillable = [
         'user_id',
         'item_id',
+        'item_name',
+        'category',
+        'description',
+        'item_image',
         'date_lost',
         'location_lost',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     public function user()
     {
@@ -21,5 +31,10 @@ class LostReport extends Model
     public function item()
     {
         return $this->belongsTo(Item::class);
+    }
+
+    public function matches()
+    {
+        return $this->hasMany(ItemMatch::class);
     }
 }

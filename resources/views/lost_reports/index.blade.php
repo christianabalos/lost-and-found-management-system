@@ -5,107 +5,120 @@
         </h2>
     </x-slot>
 
-    <div class="p-6">
 
-        <a href="{{ route('lost-reports.create') }}"
+<div class="p-6">
+
+    <a href="{{ route('lost-reports.create') }}"
+       style="
+            background:#2563eb;
+            color:white;
+            padding:12px 25px;
+            border-radius:12px;
+            text-decoration:none;
+            font-size:18px;
+            font-weight:bold;
+            display:inline-block;
+       ">
+        + Add Lost Report
+    </a>
+
+    <br><br>
+
+    <table width="100%"
+           cellpadding="18"
            style="
-                background:#2563eb;
-                color:white;
-                padding:12px 25px;
-                border-radius:12px;
-                text-decoration:none;
-                font-size:18px;
-                font-weight:bold;
-                display:inline-block;
-                box-shadow:0 2px 8px rgba(0,0,0,.15);
+                border-collapse:collapse;
+                background:white;
+                border-radius:18px;
+                overflow:hidden;
+                box-shadow:0 4px 12px rgba(0,0,0,.08);
            ">
-            + Add Lost Report
-        </a>
 
-        <br><br>
+        <thead style="background:#2948b8;color:white;">
+            <tr>
+                <th>ID</th>
+                <th>Item Details</th>
+                <th>Date Lost</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
-        <table width="100%"
-               cellpadding="18"
-               style="
-                    border-collapse:collapse;
-                    background:white;
-                    border-radius:18px;
-                    overflow:hidden;
-                    box-shadow:0 4px 12px rgba(0,0,0,.08);
-               ">
+        <tbody>
 
-            <thead style="background:#2948b8;color:white;">
+        @foreach($reports as $report)
 
-                <tr>
-                    <th style="text-align:center;">ID</th>
-                    <th style="text-align:left;">Item</th>
-                    <th style="text-align:center;">Date Lost</th>
-                    <th style="text-align:left;">Location Lost</th>
-                    <th style="text-align:center;">Actions</th>
-                </tr>
+            <tr style="border-bottom:1px solid #e5e7eb;">
 
-            </thead>
+                <td>{{ $report->id }}</td>
 
-            <tbody>
+                <td>
 
-                @foreach($reports as $report)
+                @if($report->item_image)
+                    <img
+                        src="{{ asset($report->item_image) }}"
+                        width="120"
+                        height="120"
+                        style="border-radius:10px;object-fit:cover;"
+                    >
+                @endif
 
-                <tr style="border-bottom:1px solid #e5e7eb;">
+                    <strong>{{ $report->item_name }}</strong>
 
-                    <td style="text-align:center;">
-                        {{ $report->id }}
-                    </td>
+                    <br>
 
-                    <td>
-                        <strong>{{ $report->item->item_name }}</strong>
-                    </td>
+                    <small style="color:#2563eb;">
+                        {{ $report->category }}
+                    </small>
 
-                    <td style="text-align:center;">
-                        {{ $report->date_lost }}
-                    </td>
+                    <br>
 
-                    <td>
-                        {{ $report->location_lost }}
-                    </td>
+                    <small>
+                        {{ $report->description }}
+                    </small>
 
-                    <td style="text-align:center;">
+                </td>
 
-                        <a href="{{ route('lost-reports.edit', $report->id) }}"
-                           style="
-                                color:#2563eb;
-                                text-decoration:none;
-                                font-weight:bold;">
-                            ✏️ Edit
-                        </a>
+                <td>{{ $report->date_lost }}</td>
 
-                        &nbsp;|&nbsp;
+                <td>{{ $report->location_lost }}</td>
 
-                        <form action="{{ route('lost-reports.destroy', $report->id) }}"
-                              method="POST"
-                              style="display:inline;">
-                            @csrf
-                            @method('DELETE')
+                <td>
 
-                            <button type="submit"
-                                    style="
-                                        background:none;
-                                        border:none;
-                                        color:#dc2626;
-                                        cursor:pointer;
-                                        font-weight:bold;">
-                                🗑️ Delete
-                            </button>
-                        </form>
+                    <a href="{{ route('lost-reports.edit', $report->id) }}">
+                        ✏️ Edit
+                    </a>
 
-                    </td>
+                    <br><br>
 
-                </tr>
+                    <form action="{{ route('lost-reports.destroy', $report->id) }}"
+                          method="POST">
 
-                @endforeach
+                        @csrf
+                        @method('DELETE')
 
-            </tbody>
+                        <button type="submit"
+                                style="
+                                    background:none;
+                                    border:none;
+                                    color:red;
+                                    cursor:pointer;
+                                ">
+                            🗑️ Delete
+                        </button>
 
-        </table>
+                    </form>
 
-    </div>
+                </td>
+
+            </tr>
+
+        @endforeach
+
+        </tbody>
+
+    </table>
+
+</div>
+
 </x-app-layout>

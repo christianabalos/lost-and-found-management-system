@@ -14,14 +14,43 @@ return new class extends Migration
         Schema::create('claims', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('item_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')
+                ->constrained()
+                ->onDelete('cascade');
 
+            $table->foreignId('item_id')
+                ->constrained()
+                ->onDelete('cascade');
+
+            // Claim Verification Details
+            $table->text('reason');
+            $table->text('unique_identifier');
+            $table->date('date_lost');
+            $table->string('location_lost');
+
+            // Optional proof upload
+            $table->string('proof_image')->nullable();
+
+            // Claim Status Workflow
             $table->enum('claim_status', [
                 'pending',
+                'under_review',
                 'approved',
-                'rejected'
+                'rejected',
+                'claimed'
             ])->default('pending');
+
+            // Admin review notes
+            $table->text('admin_notes')->nullable();
+
+            // Which admin reviewed the claim
+            $table->foreignId('reviewed_by')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            // When claim was reviewed
+            $table->timestamp('verified_at')->nullable();
 
             $table->timestamps();
         });

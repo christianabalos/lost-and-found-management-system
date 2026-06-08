@@ -87,9 +87,9 @@
                             style="
                                 background:#7c3aed;
                                 color:white;
-                                padding:10px 20px;
+                                padding:10px 15px;
                                 border:none;
-                                border-radius:10px;
+                                border-radius:20px;
                                 cursor:pointer;
                                 margin-left:10px;">
                         📥 Import CSV/XLSX
@@ -104,7 +104,7 @@
                style="
                     border-collapse:collapse;
                     background:white;
-                    border-radius:18px;
+                    border: radius 18px;
                     overflow:hidden;
                     box-shadow:0 4px 12px rgba(0,0,0,.08);
                ">
